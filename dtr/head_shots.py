@@ -25,13 +25,13 @@ def show_menu():
 def _print_switcher(img_counter):
     
     choices = {
-        0: 'Look at the Camera!',
-        1: 'Slightly look UP!',
-        2: 'Slightly look DOWN!',
-        3: 'Slightly look to your LEFT!',
-        4: 'Slightly look to your RIGHT!',
-        5: 'Look at the Camera AGAIN!',
-        6: 'Successfully registered a new Employee. Press Spacebar to continue...'
+        0: 'Remove your face mask and look at the Camera!',
+        1: 'Slightly tilt your head UP!',
+        2: 'Slightly tilt your head DOWN!',
+        3: 'Slightly tilt your head to your LEFT!',
+        4: 'Slightly tilt your head to your RIGHT!',
+        5: 'Put on your face mask and look at the Camera AGAIN!',
+        6: 'Successfully registered a new Employee. Press again to continue...'
     }
     
     if img_counter == 6:

@@ -46,7 +46,7 @@ def read(login_funcy, logout_funcy, arrival_funcy, departure_funcy, name):
 			departure_funcy(name)
 
 def read_kboard():
-	
+
 	if GPIO.event_detected(login_btn):
 		if settings.ACTIVE_APP == 'aip':
 			keyboard.press('1')
@@ -61,3 +61,6 @@ def read_kboard():
 		
 	if GPIO.event_detected(departure_btn):
 		keyboard.press('4')
+
+
+	
