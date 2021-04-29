@@ -1,5 +1,14 @@
 import sys, os, inspect
 
+# import pickle
+
+# import settings
+# Need this to import the helpers package
+# parentdir = settings.PARENT_DIR
+# sys.path.insert(0, parentdir)
+
+
+
 # print(sys.path)
 # currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 # parentdir = os.path.dirname(currentdir)
@@ -55,5 +64,15 @@ import sys, os, inspect
 # print(name)
 # open("/home/pi/aip_mvc/dtr/dtr_app/encodings.pickle")
 
-path = os.path.join("/home/pi/aip_mvc/dtr/dtr_app/dataset", "Clyde Khayad")
-print(path.find("Clyed"))
+# path = os.path.join("/home/pi/aip_mvc/dtr/dtr_app/dataset", "Clyde Khayad")
+# print(path.find("Clyed"))
+
+# file = open(settings.PICKLE_FILE_PATH, 'rb')
+# data = pickle.loads(open(settings.PICKLE_FILE_PATH, 'rb').read())
+
+# file.close()
+
+# cnt = 0
+# for item in data['names']:
+#     print(item)
+#     cnt += 1

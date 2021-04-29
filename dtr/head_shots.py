@@ -6,6 +6,8 @@ from helpers.print import pretty_message, BColors
 from helpers import pushbuttons
 import settings
 
+from dtr.train_model import train_model_partial
+
 name = ''
 
 DONE = 'Done'
@@ -25,12 +27,12 @@ def show_menu():
 def _print_switcher(img_counter):
     
     choices = {
-        0: 'Remove your face mask and look at the Camera!',
+        0: 'Look at the Camera!',
         1: 'Slightly tilt your head UP!',
         2: 'Slightly tilt your head DOWN!',
         3: 'Slightly tilt your head to your LEFT!',
         4: 'Slightly tilt your head to your RIGHT!',
-        5: 'Put on your face mask and look at the Camera AGAIN!',
+        5: 'Look at the Camera AGAIN!',
         6: 'Successfully registered a new Employee. Press again to continue...'
     }
     
@@ -57,7 +59,7 @@ def init_camera():
     cv2.namedWindow("press space to take a photo", cv2.WINDOW_NORMAL)
     cv2.resizeWindow("press space to take a photo", 500, 300)
 
-    pretty_message('Camera ready.Please follow the instructions.\n', BColors.INFO)
+    pretty_message('Camera ready. Please follow the instructions.\n', BColors.INFO)
     
     return cam
     
@@ -97,10 +99,11 @@ def _main():
             # SPACE pressed
             if img_counter <= 5:
 
-                dataset_path = os.path.join(settings.DATASET_PATH, name)
+                dataset_path = os.path.join(settings.DATASET_UNTRAINED_PATH, name)
                 if not os.path.exists(dataset_path):
                     os.mkdir(dataset_path)
 
+                # Create a folder for untrained models
                 img_name = os.path.join(dataset_path, "image_{}.jpg".format(img_counter))
                 cv2.imwrite(img_name, frame)
                 pretty_message("{} written!".format(img_name), BColors.OKGREEN)
@@ -111,7 +114,10 @@ def _main():
                 call_back = DONE
                 again = input('Would you like to register a new employee? (Y/N): ')
                 if again == 'N' or again == 'n':
-                    break
+                    # Call train_model function
+                    train_model_partial()
+                    close_camera(cam)
+                    return
                 elif again == 'Y' or again == 'y':
                     close_camera(cam)
                     _new_input()

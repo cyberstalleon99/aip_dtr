@@ -7,4 +7,7 @@ import time
 import cv2
 import sys
 
-print(sys.path)
+from dtr import test
+
+# print(sys.path)
+test.start()

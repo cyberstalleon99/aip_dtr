@@ -28,7 +28,7 @@ def new_unit():
         time.sleep
 
 def _train_model():
-    train_model.train_model()
+    train_model.train_model_partial()
     new_input()
 
 def _exit():

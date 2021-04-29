@@ -16,7 +16,11 @@ LOG_TIMEOUT = 5
 USE_LOGIN_BTN_TO_CAPTURE = True
 
 # HEADSHOTS SETTINGS
-DATASET_PATH = os.path.join(PARENT_DIR, 'dtr/dtr_app/dataset')
+# Trained Models Path
+DATASET_PATH = os.path.join(PARENT_DIR, 'dtr/dtr_app/dataset/Done')
+
+# Untrained Models Path
+DATASET_UNTRAINED_PATH = os.path.join(PARENT_DIR, 'dtr/dtr_app/dataset/For_Training')
 
 # SWITCH: KEYBOARD OR PUSHBUTTONS
 USE_KEYBOARD = True
