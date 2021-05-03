@@ -41,6 +41,17 @@ class Entry(object):
         return result
 
     @staticmethod
+    def getAllRange(date_from, date_to):
+        qry = f"SELECT * FROM logbook WHERE time_log BETWEEN '{date_from}' and '{date_to}'"
+        cur.execute(qry)
+        result = [] 
+        for item in cur:
+            entry = Entry(item[1], item[2], item[3], item[4], item[5], item[6])
+            result.append(entry)
+
+        return result
+
+    @staticmethod
     def last_user_entry(name, time_in=True):
         curr_date = datetime.strftime(Entry.curr_date, '%Y-%m-%d')
         if time_in:

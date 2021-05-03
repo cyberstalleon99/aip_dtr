@@ -8,6 +8,12 @@ import cv2
 import sys
 
 from dtr import test
+from dtr.dtr_app import aip
+from helpers import excel
+
 
 # print(sys.path)
-test.start()
+# test.start()
+# excel.write('Test', )
+
+aip.extract_dtr()

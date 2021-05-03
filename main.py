@@ -3,7 +3,9 @@
 from datetime import datetime
 import time
 
+print('Importing Views.....')
 from view import main_menu_view
+print('Importing Apps. Please wait.....')
 from dtr import head_shots, register_unit, train_model
 from dtr.dtr_app import aip
 from helpers.print import clear, pretty_message, BColors

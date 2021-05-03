@@ -3,7 +3,6 @@ from datetime import datetime
 import RPi.GPIO as GPIO
 import requests
 from requests.auth import HTTPBasicAuth
-import requests
 import sys
 
 from imutils.video import VideoStream
@@ -24,6 +23,7 @@ from helpers.rfid import rfid_reader
 from helpers import pushbuttons
 from helpers.network import connect, api_request
 from helpers.print import pretty_message, BColors
+from helpers import excel
 
 from dtr.dtr_app.models import Entry, FleetEntry
 
@@ -33,8 +33,6 @@ from dtr.dtr_app.models import Entry, FleetEntry
 LOCATION = settings.LOCATION
 # Set log timeout to 5 minutes
 LOG_TIMEOUT = settings.LOG_TIMEOUT
-
-
 
 # ****************************************************************
 # GLOBAL variables
@@ -46,6 +44,11 @@ cascade = settings.XML_FILE_PATH
 
 current_date = datetime.now()
 current_date_str = datetime.strftime(current_date, '%Y-%m-%d')
+
+def extract_dtr():
+	excel.write('Logbook', Entry.getAllRange('2021-04-14', '2021-04-27'))
+	# print(Entry.getAllRange('2021-04-14', '2021-04-27'))
+	# print(Entry.getAll())
 
 def try_again():
 	pretty_message('Haan ko sika makita. Pakiulit man.', BColors.INFO)
@@ -220,6 +223,9 @@ def start_dtr():
 	_main()
 
 def _main():
+	name = 'Unknown'
+	curr_name = ''
+
 	init()
 	show_menu()
 	# load the known faces and embeddings along with OpenCV's Haar
@@ -301,8 +307,10 @@ def _main():
 			cv2.putText(frame, name, (left, y), cv2.FONT_HERSHEY_SIMPLEX,
 				.8, (0, 255, 0), 2)
 
+		
 		# display the image to our screen
 		cv2.imshow("Facial Recognition is Running", frame)
+		# cv2.moveWindow("Facial Recognition is Running", 40, 30)
 		key = cv2.waitKey(1) & 0xFF
 
 		# if key%256 != 255:
@@ -327,9 +335,12 @@ def _main():
 			# 4 pressed
 			departure(name)
 			#print_disabled_kbrd()
+		else:
+			# print(name)
+			curr_name = name
 			
-		# pushbuttons.read(log_in, log_out, arrival, departure, name)
-		pushbuttons.read_kboard()
+		pushbuttons.read(log_in, log_out, arrival, departure, curr_name)
+		# pushbuttons.read_kboard()
 		# update the FPS counter
 		fps.update()
 

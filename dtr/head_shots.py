@@ -112,7 +112,7 @@ def _main():
                 _print_switcher(img_counter)
             else:
                 call_back = DONE
-                again = input('Would you like to register a new employee? (Y/N): ')
+                again = input('Would you like to register a new employee? (Y/N). Press Q to exit: ')
                 if again == 'N' or again == 'n':
                     # Call train_model function
                     train_model_partial()
@@ -121,6 +121,9 @@ def _main():
                 elif again == 'Y' or again == 'y':
                     close_camera(cam)
                     _new_input()
+                elif again == 'Q' or again == 'q':
+                    close_camera(cam)
+                    return
                 else:
                     pretty_message('Invalid input. Please choose between Y/N', BColors.FAIL)
 
