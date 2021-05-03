@@ -4,7 +4,7 @@ import sys
 # Do not edit this variable
 ACTIVE_APP = ''
 
-PARENT_DIR = '/home/pi/aip'
+PARENT_DIR = '/home/pi/aip_dtr'
 
 # DTR SETTINGS
 DB_PATH = os.path.join(PARENT_DIR, 'dtr/dtr_app/aip_dtr.db')
