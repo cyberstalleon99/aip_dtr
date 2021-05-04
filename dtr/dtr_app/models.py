@@ -1,7 +1,10 @@
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import settings
+from helpers.print import pretty_message, BColors
+from helpers import excel, dates
+
 db = sqlite3.connect(settings.DB_PATH)
 cur = db.cursor()
 # curr_date = datetime.now()
@@ -72,6 +75,29 @@ class Entry(object):
                 return datetime.strptime(query_result[4], '%Y-%m-%d %H:%M:%S.%f')
             else:
                 return None
+
+    @staticmethod
+    def export_to_excel():
+        date_from = input('From (YYYY-MM-DD). Press Q to exit: ')
+        date_to = ''
+        if dates.validate(date_from):
+            date_to = input('  To (YYYY-MM-DD). Press Q to exit: ')
+        else:
+            if date_from == 'Q' or date_from == 'q':
+                return
+            else:
+                pretty_message('Not a valid date. Date Format: YYYY-MM-DD', BColors.FAIL)
+                Entry.export_to_excel()
+
+        if dates.validate(date_to):
+            excel.write('Logbook', Entry.getAllRange(date_from, datetime.strptime(date_to, "%Y-%m-%d") + timedelta(days=1)))
+            pretty_message(f'Saved in {settings.DTR_EXTRACTS_PATH}', BColors.OKGREEN)
+        else:
+            if date_from == 'Q' or date_from == 'q':
+                return
+            else:
+                pretty_message('Not a valid date. Date Format: YYYY-MM-DD', BColors.FAIL)
+                Entry.export_to_excel()
 
 class FleetEntry(object):
 

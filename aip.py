@@ -8,22 +8,23 @@ from view import main_menu_view
 print('Importing Apps. Please wait.....')
 from dtr import head_shots, register_unit, train_model
 from dtr.dtr_app import aip
+from dtr.dtr_app.models import Entry
 from helpers.print import clear, pretty_message, BColors
 
-def start_dtr():
+def _start_dtr():
     clear()
     aip.start_dtr()
 
     clear()
     _main()
 
-def register_employee():
+def _register_employee():
     clear()
     head_shots.new_head_shot()
 
     _main()
 
-def new_unit():
+def _new_unit():
     try:
         clear()
         register_unit.new_unit()
@@ -35,6 +36,10 @@ def _train_model():
     train_model.train_model_partial()
     new_input()
 
+def _extract_dtr():
+    Entry.export_to_excel()
+    new_input()
+
 def _exit():
     pass
 
@@ -44,10 +49,11 @@ def invalid_input():
 
 def switch_main_menu(choice):
     switcher = {
-        '1': start_dtr,
-        '2': register_employee,
-        '3': new_unit, 
-        '4': _train_model,
+        '1': _start_dtr,
+        '2': _register_employee,
+        '3': _train_model, 
+        '4': _extract_dtr, 
+        '5': _new_unit,
         'Q': _exit,
         'q': _exit
     }

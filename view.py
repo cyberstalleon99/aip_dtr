@@ -9,8 +9,9 @@ def main_menu_view():
     pretty_message("Choices:", BColors.OKCYAN, False)
     pretty_message(" - (1): Start DTR", BColors.OKGREEN, False)
     pretty_message(" - (2): New Employee", BColors.FAIL, False)
-    pretty_message(" - (3): New Unit", BColors.OKCYAN, False)
-    pretty_message(" - (4): Train Model", BColors.INFO, False)
+    pretty_message(" - (3): Train Model", BColors.INFO, False)
+    pretty_message(" - (4): Extract DTR", BColors.INFO, False)
+    pretty_message(" - (5): New Unit", BColors.OKCYAN, False)
     pretty_message(" - (Q): To Exit", BColors.HEADER, False)
     print("*******************************************************")
 

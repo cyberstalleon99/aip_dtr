@@ -9,6 +9,7 @@ import sys
 
 from dtr import test
 from dtr.dtr_app import aip
+from dtr.dtr_app.models import Entry
 from helpers import excel
 
 
@@ -16,4 +17,5 @@ from helpers import excel
 # test.start()
 # excel.write('Test', )
 
-aip.extract_dtr()
+# aip.extract_dtr()
+Entry.export_to_excel()

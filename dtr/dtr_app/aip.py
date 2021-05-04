@@ -20,10 +20,9 @@ parentdir = settings.PARENT_DIR
 sys.path.insert(0, parentdir)
 
 from helpers.rfid import rfid_reader
-from helpers import pushbuttons
+from helpers import pushbuttons, dates
 from helpers.network import connect, api_request
 from helpers.print import pretty_message, BColors
-from helpers import excel
 
 from dtr.dtr_app.models import Entry, FleetEntry
 
@@ -44,11 +43,6 @@ cascade = settings.XML_FILE_PATH
 
 current_date = datetime.now()
 current_date_str = datetime.strftime(current_date, '%Y-%m-%d')
-
-def extract_dtr():
-	excel.write('Logbook', Entry.getAllRange('2021-04-14', '2021-04-27'))
-	# print(Entry.getAllRange('2021-04-14', '2021-04-27'))
-	# print(Entry.getAll())
 
 def try_again():
 	pretty_message('Haan ko sika makita. Pakiulit man.', BColors.INFO)
