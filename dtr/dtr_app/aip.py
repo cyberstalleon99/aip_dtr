@@ -49,16 +49,17 @@ def try_again():
 
 def do_login(new_name):
 	pretty_message(f"Logging IN {BColors.OKCYAN}{new_name}{BColors.ENDC}.....", BColors.INFO)
-	new_in_entry = Entry(name=new_name, location=LOCATION, date_in=current_date)
+	new_in_entry = Entry(name=new_name, location=LOCATION, date_in=datetime.now())
 	new_in_entry.save()
-	# print(current_date_str)
-	pretty_message(f"Logged {BColors.OKCYAN}{new_name}{BColors.ENDC} successfully at {BColors.OKCYAN}{current_date}{BColors.ENDC}", BColors.OKGREEN)
+	pretty_message(f"Logged {BColors.OKCYAN}{new_name}{BColors.ENDC} successfully at {BColors.OKCYAN}{datetime.now()}{BColors.ENDC}", BColors.OKGREEN)
+	# print(datetime.now())
 	
 def do_logout(new_name):
 	pretty_message(f"Logging OUT {BColors.OKCYAN}{new_name}{BColors.ENDC}.....", BColors.INFO)
-	new_out_entry = Entry(name=new_name, location=LOCATION, date_out=current_date)
+	new_out_entry = Entry(name=new_name, location=LOCATION, date_out=datetime.now())
 	new_out_entry.save()
-	pretty_message(f"Logged {BColors.OKCYAN}{new_name}{BColors.ENDC} successfully at {BColors.OKCYAN}{current_date_str}{BColors.ENDC}", BColors.OKGREEN)
+	pretty_message(f"Logged {BColors.OKCYAN}{new_name}{BColors.ENDC} successfully at {BColors.OKCYAN}{datetime.now()}{BColors.ENDC}", BColors.OKGREEN)
+	# print(datetime.now())
 	
 def send_request(unit, trans_type):
 	
@@ -112,7 +113,7 @@ def arrival(new_name):
 				#print(id)
 				pretty_message(f"Unit: {unit}", BColors.INFO)
 				#save to database
-				new_arrival_entry = FleetEntry(name=new_name, unit=unit, date_in=current_date_str)
+				new_arrival_entry = FleetEntry(name=new_name, unit=unit, date_in=datetime.now())
 				new_arrival_entry.save()
 				#pretty_message('Unit Logged IN successfully, drive safe!', BColors.OKGREEN)
 				pretty_message("User: %s" %(new_name), BColors.INFO)
@@ -140,7 +141,7 @@ def departure(new_name):
 				#print(id)
 				pretty_message(f"Unit: {unit}", BColors.INFO)
 				#save to database
-				new_departure_entry = FleetEntry(name=new_name, unit=unit, date_out=current_date_str)
+				new_departure_entry = FleetEntry(name=new_name, unit=unit, date_out=datetime.now())
 				new_departure_entry.save()
 				#pretty_message('Unit Logged OUT successfully, drive safe!', BColors.OKGREEN)
 				pretty_message("User: %s" %(new_name), BColors.INFO)
@@ -165,7 +166,7 @@ def log_in(new_name):
 		if last_user_time_in == None:
 			do_login(new_name)
 		else:
-			time_diff = (current_date - last_user_time_in).total_seconds() / 60.0
+			time_diff = (datetime.now() - last_user_time_in).total_seconds() / 60.0
 			if time_diff < LOG_TIMEOUT:
 				pretty_message(F'Ustun. Nakalogin kan apo {BColors.OKCYAN}{new_name}{BColors.ENDC}', BColors.FAIL)
 			else:
@@ -187,7 +188,7 @@ def log_out(new_name):
 			do_logout(new_name)
 			
 		else:
-			time_diff = (current_date - last_user_time_out).total_seconds() / 60.0 
+			time_diff = (datetime.now() - last_user_time_out).total_seconds() / 60.0 
 			if time_diff < LOG_TIMEOUT:
 				pretty_message(F'Ustun. Nakalogout kan apo {BColors.OKCYAN}{new_name}{BColors.ENDC}', BColors.FAIL)
 			else:
