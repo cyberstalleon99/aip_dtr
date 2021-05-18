@@ -70,8 +70,10 @@ class Entry(object):
             return None
         else:
             if time_in == True:
+                # return datetime.strptime(query_result[3], '%Y-%m-%d %H:%M:%S')
                 return datetime.strptime(query_result[3], '%Y-%m-%d %H:%M:%S.%f')
             elif time_in == False:
+                # return datetime.strptime(query_result[4], '%Y-%m-%d %H:%M:%S')
                 return datetime.strptime(query_result[4], '%Y-%m-%d %H:%M:%S.%f')
             else:
                 return None
